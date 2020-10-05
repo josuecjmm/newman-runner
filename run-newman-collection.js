@@ -6,8 +6,7 @@ const {collection, environment} = require('./config/collection.config');
 
 async function createNewmanDir() {
   const { stdout, stderr } = await exec(
-    `cd ./reports
-    mkdir -p newman`
+    `mkdir -p reports`
   )
   if (stdout !== '') console.log('stdout:', stdout)
   if (stderr !== '') console.log('stdout:', stderr)
@@ -17,7 +16,7 @@ createNewmanDir()
 
 async function openReport() {
   const { stdout, stderr } = await exec(
-    `cd ./reports/newman
+    `cd ./reports
     file=$(ls -t | head -n1 |awk '{printf("%s",$0)}') 
     open $file`
   )
@@ -31,7 +30,7 @@ newman.run({
   reporters: ['htmlextra', 'cli'],
   reporter: {
     htmlextra: {
-      export: './reports/newman',
+      export: './reports',
       logs: true,
     },
   },
