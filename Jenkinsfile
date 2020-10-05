@@ -1,20 +1,17 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:14-alpine' 
-            args '-p 3000:3000' 
-        }
-    }
+    agent none 
     stages {
         stage('Build') { 
             steps {
-                sh 'npm install' 
+                Build()
             }
         }
-        stage('Test') { 
-            steps {
-                sh 'npm test' 
-            }
-        }
+    }
+}
+def Build() {
+    withDockerContainer("node:14")
+    { 
+        sh "npm install"
+        sh "npm test"
     }
 }
