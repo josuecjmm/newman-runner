@@ -2,7 +2,7 @@ const newman = require('newman')
 const util = require('util')
 const exec = util.promisify(require('child_process').exec)
 
-const {collection, environment} = require('./config/collection.config'); 
+const {collection, environment} = require('./config/collection.config');
 
 async function createNewmanDir() {
   const { stdout, stderr } = await exec(
@@ -13,7 +13,7 @@ async function createNewmanDir() {
 }
 
 createNewmanDir()
-
+// TODO: Add separate directories if reports is a json vs an html
 async function openReport() {
   const { stdout, stderr } = await exec(
     `cd ./reports
