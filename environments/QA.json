@@ -1,0 +1,19 @@
+{
+	"id": "42e2303f-a24e-4dac-8acd-584c96fc1167",
+	"name": "Pilotly - QA",
+	"values": [
+		{
+			"key": "url",
+			"value": "https://study-intake-git-dev-pilotly.vercel.app/api",
+			"enabled": true
+		},
+		{
+			"key": "token",
+			"value": "",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2021-12-21T01:23:41.859Z",
+	"_postman_exported_using": "Postman/8.11.1"
+}
