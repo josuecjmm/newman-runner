@@ -1,0 +1,309 @@
+{
+	"info": {
+		"_postman_id": "d4feef81-90ba-4b62-b62d-80483c763ef9",
+		"name": "Pilotly-Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login - Positive",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const body = JSON.parse(responseBody); ",
+									"",
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(responseCode.code === 200) {",
+									"    pm.environment.set(\"token\", body.token)",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authority",
+								"value": "study-intake-git-dev-pilotly.vercel.app"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"96\", \"Google Chrome\";v=\"96\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"macOS\""
+							},
+							{
+								"key": "content-type",
+								"value": "text/plain;charset=UTF-8"
+							},
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "origin",
+								"value": "https://study-intake-git-dev-pilotly.vercel.app"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "referer",
+								"value": "https://study-intake-git-dev-pilotly.vercel.app/login"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "cookie",
+								"value": "_ga=GA1.3.153195113.1640047988; _gid=GA1.3.1122662448.1640047988; _gat=1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"testuser1@example.com\",\n    \"password\": \"sample1@test2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Login - Negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const body = JSON.parse(responseBody)",
+									"",
+									"pm.test(\"Status code is 400\", () => {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Expect incorrect email or password error\", () => {",
+									"    const error = body.errors[0].error.reason; ",
+									"    pm.expect(error).to.eql(\"incorrect_email_or_password\")",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authority",
+								"value": "study-intake-git-dev-pilotly.vercel.app"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"96\", \"Google Chrome\";v=\"96\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"macOS\""
+							},
+							{
+								"key": "content-type",
+								"value": "text/plain;charset=UTF-8"
+							},
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "origin",
+								"value": "https://study-intake-git-dev-pilotly.vercel.app"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "referer",
+								"value": "https://study-intake-git-dev-pilotly.vercel.app/login"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "cookie",
+								"value": "_ga=GA1.3.153195113.1640047988; _gid=GA1.3.1122662448.1640047988; _gat=1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test_wrong@example.com\",\n    \"password\": \"sample1@test2_test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Requests",
+			"item": [
+				{
+					"name": "Create Study - Positive",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const body = JSON.parse(responseBody); ",
+									"",
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Study just created must be PENDING\", () => {",
+									"    const status = body.status; ",
+									"    pm.expect(status).to.eql('PENDING')",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authority",
+								"value": "study-intake-git-dev-pilotly.vercel.app"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"96\", \"Google Chrome\";v=\"96\""
+							},
+							{
+								"key": "x-user-token",
+								"value": "6407a39a14ba0b183dcca65f12de47a5f6265f7eb62c75f15af390e4e1b3fd2067417e7475ac86151f99fe5c8da5c2cc"
+							},
+							{
+								"key": "content-type",
+								"value": "text/plain;charset=UTF-8"
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"macOS\""
+							},
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "origin",
+								"value": "https://study-intake-git-dev-pilotly.vercel.app"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "referer",
+								"value": "https://study-intake-git-dev-pilotly.vercel.app/requests/create"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "cookie",
+								"value": "_ga=GA1.3.153195113.1640047988; _gid=GA1.3.1122662448.1640047988; _gat=1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tempId\": \"61c128f88c563ba29216723e\",\n    \"name\": \"test{{$randomCompanyName}}-{{$randomAlphaNumeric}}\",\n    \"projectId\": \"06df6837f775496faf2210aa\",\n    \"type\": \"concept\",\n    \"deliverablesDeadline\": \"2021-12-29T01:08:15.240Z\",\n    \"assetLength\": 5,\n    \"numAssets\": 1,\n    \"audienceId\": \"1\",\n    \"customAudienceDescription\": \"\",\n    \"services\": [\n        \"setup\",\n        \"survey_design\",\n        \"stat_test_tables\"\n    ],\n    \"assets\": [],\n    \"surveys\": [],\n    \"sampleSize\": 1800,\n    \"price\": 0,\n    \"market\": \"US\",\n    \"noVideoRequired\": false,\n    \"tags\": [],\n    \"clientGoalsForStudy\": \"{{$randomLoremParagraph}}\",\n    \"areVideoLinksEncrypted\": false,\n    \"customStudyDescription\": \"\",\n    \"customMethodologies\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/study/create"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
